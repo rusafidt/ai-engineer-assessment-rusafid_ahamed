@@ -26,7 +26,7 @@ async def lifespan(app: FastAPI):
     index = DocumentIndex.from_dir(settings.data_dir)
     log.info("indexed %d chunks from %d documents", len(index.chunks), len(index.titles))
 
-    # max_retries=1: one retry for rate limits / transient 5xx / connection errors, nothing fancier
+    # max_retries=1: one retry for rate limits / transient 5xx / connection errors
     sdk = AsyncOpenAI(
         api_key=settings.llm_api_key,
         base_url=settings.llm_base_url,

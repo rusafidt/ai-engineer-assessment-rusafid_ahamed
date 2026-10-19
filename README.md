@@ -8,7 +8,7 @@ How a request flows:
 2. **Fetch.** Hero lookups run concurrently against the API. Documents are searched with BM25 over ~180-word chunks.
 3. **Answer.** A second LLM call answers using only the numbered sources and cites them inline (`[S1]`). The response returns only the sources that were actually cited.
 
-The LLM is Groq (`llama-3.3-70b-versatile`) by default, called through the official `openai` SDK (retries and timeouts come from the SDK). Any OpenAI-compatible endpoint works by changing `LLM_BASE_URL` / `LLM_MODEL`: OpenAI, Groq, Gemini, OpenRouter, Ollama, vLLM and so on.
+The LLM is Groq (`openai/gpt-oss-120b`) by default, called through the official `openai` SDK (retries and timeouts come from the SDK). Any OpenAI-compatible endpoint works by changing `LLM_BASE_URL` / `LLM_MODEL`: OpenAI, Groq, Gemini, OpenRouter, Ollama, vLLM and so on.
 
 ## Setup
 
