@@ -15,13 +15,15 @@ The LLM is Groq (`openai/gpt-oss-120b`) by default, called through the official 
 Requires Python 3.12+.
 
 ```bash
-git clone https://github.com/<you>/ai-engineer-assessment-<name>.git
-cd ai-engineer-assessment-<name>
+git clone https://github.com/rusafidt/ai-engineer-assessment-rusafid_ahamed.git
+cd ai-engineer-assessment-rusafid_ahamed
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements-dev.txt
-cp .env.example .env             # then fill in both keys
+cp .env.example .env             # Windows: copy .env.example .env
 ```
+
+Then open `.env` and set `LLM_API_KEY` (your Groq key) and `SUPERHERO_API_TOKEN`. `LLM_BASE_URL` and `LLM_MODEL` are pre-filled for Groq.
 
 - Groq key: https://console.groq.com/keys
 - Superhero API token: sign in with GitHub at https://superheroapi.com
