@@ -43,6 +43,10 @@ class Hero:
             ("Powerstats (0-100)", stats or "not available"),
             ("Gender", self.appearance.get("gender")),
             ("Race", self.appearance.get("race")),
+            ("Height", _measure(self.appearance.get("height"))),
+            ("Weight", _measure(self.appearance.get("weight"))),
+            ("Eye colour", self.appearance.get("eye-color")),
+            ("Hair colour", self.appearance.get("hair-color")),
             ("Occupation", self.work.get("occupation")),
             ("Base", self.work.get("base")),
             ("Group affiliation", self.connections.get("group-affiliation")),
@@ -52,6 +56,11 @@ class Hero:
 
 def _known(value) -> bool:
     return value not in (None, "", "null", "-")
+
+
+def _measure(values) -> str:
+    # height/weight come in two units, e.g. ["6'2", "188 cm"]; unknown ones are "- lb" / "0 kg"
+    return " / ".join(v for v in values or [] if _known(v) and not v.startswith(("-", "0 ")))
 
 
 class SuperheroClient:

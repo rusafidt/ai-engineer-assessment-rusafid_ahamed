@@ -14,7 +14,8 @@ SYSTEM_PROMPT = """You route questions for a Q&A bot that has two data sources.
 
 "superhero" - the Superhero API. Looked up by character name only. Has powerstats \
 (intelligence, strength, speed, durability, power, combat), real name, aliases, publisher, \
-alignment, first appearance, gender, race, occupation, base, team affiliations.
+alignment, first appearance, gender, race, height, weight, eye and hair colour, occupation, \
+base, team affiliations.
 
 "documents" - encyclopedia articles on comic book history: {titles}. Good for creators, \
 publishers, eras, censorship, industry history.
@@ -28,6 +29,8 @@ Reply with JSON only, in this exact shape:
 Examples:
 Q: How fast is the Flash?
 {{"superhero": true, "documents": false, "heroes": ["Flash"], "query": ""}}
+Q: How tall is Batman?
+{{"superhero": true, "documents": false, "heroes": ["Batman"], "query": ""}}
 Q: Why was the Comics Code Authority created?
 {{"superhero": false, "documents": true, "heroes": [], "query": "Comics Code Authority formation reasons"}}
 Q: Who created Spider-Man and how strong is he?

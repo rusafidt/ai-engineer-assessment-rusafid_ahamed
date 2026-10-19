@@ -7,7 +7,7 @@ from openai import AsyncOpenAI
 
 from app.errors import UpstreamError
 from app.llm import LLMClient
-from app.superhero import SuperheroClient
+from app.superhero import Hero, SuperheroClient
 
 BATMAN = {
     "id": "70",
@@ -47,6 +47,19 @@ async def test_context_skips_missing_values():
     assert "intelligence 100, strength 26" in text
     assert "speed" not in text  # "null" in the API
     assert "Occupation" not in text and "Aliases" not in text  # "-" placeholders
+
+
+def test_context_has_height_and_weight_without_placeholders():
+    known = {**BATMAN, "appearance": {"height": ["6'2", "188 cm"], "weight": ["210 lb", "95 kg"], "eye-color": "blue"}}
+    text = Hero.from_api(known).to_context()
+    assert "Height: 6'2 / 188 cm" in text
+    assert "Weight: 210 lb / 95 kg" in text
+    assert "Eye colour: blue" in text
+
+    # what the API sends when it doesn't know
+    unknown = {**BATMAN, "appearance": {"height": ["-", "0 cm"], "weight": ["- lb", "0 kg"]}}
+    text = Hero.from_api(unknown).to_context()
+    assert "Height" not in text and "Weight" not in text
 
 
 async def test_name_is_url_encoded():
